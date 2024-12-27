@@ -4,19 +4,19 @@ import Image from "next/image";
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   return (
-    <div className=" flex sm:justify-between sm:items-center justify-between p-4 font-extrabold sm:w-full w-[800px] ">
+    <div className=" flex sm:justify-between sm:items-center justify-between p-4 font-extrabold sm:w-full w-[1200px] mb-1 h-auto">
       <div className=" w-1/4 p-2">
         <a href="/">
-          <h2 className="sm:text-2xl text-[50px] text-cyan-600">Pranshu's</h2>
+          <h2 className="sm:text-2xl text-[80px] text-cyan-600">Pranshu's</h2>
         </a>
       </div>
-      <div className=" sm:w-1/4 p-2 w-[450px] flex justify-end items-center">
+      <div className=" sm:w-1/4 p-2 w-[450px] flex justify-end items-center h-[100px">
         <ul className="flex flex-row justify-end gap-5 relative">
           <li className="">
             <a
               href="https://x.com/brocode08071934"
               target="_blank"
-              className="sm:text-[20px] text-[30px] border-b-4 border-cyan-800 hover:bg-cyan-600 transition duration-300 hover:text-white"
+              className="sm:text-[20px] text-[50px] border-b-4 border-cyan-800 hover:bg-cyan-600 transition duration-300 hover:text-white"
             >
               twitter
             </a>
@@ -25,7 +25,7 @@ const Navbar = () => {
             <a
               href="https://github.com/pranshu3099"
               target="_blank"
-              className="border-b-4 sm:text-[20px] text-[30px] border-cyan-800 hover:bg-cyan-600 transition duration-300 hover:text-white"
+              className="border-b-4 sm:text-[20px] text-[50px] border-cyan-800 hover:bg-cyan-600 transition duration-300 hover:text-white"
             >
               github
             </a>

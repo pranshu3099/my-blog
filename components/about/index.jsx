@@ -2,12 +2,12 @@ import Carousel from "../carousel";
 const About = () => {
   return (
     <>
-      <div className="flex h-auto w-full flex-wrap sm:flex-nowrap justify-between">
+      <div className="flex h-auto sm:w-full w-[1200px] flex-wrap sm:flex-nowrap justify-between">
         <div className="w-full sm:w-auto p-10 flex flex-col">
-          <h1 className="text-[40px] sm:text-[80px] text-nowrap">
+          <h1 className="text-[110px] sm:text-[80px] text-nowrap">
             Hi i'm Pranshu
           </h1>
-          <p className="p-2 sm:text-[25px] text-[30px]">
+          <p className="p-2 sm:text-[25px] text-[50px] sm:w-[600px]">
             Hi there, I'm Pranshu, aka Brocode! I'm a 24-year-old Software
             Engineer with a passion for building web applications. I mostly work
             on web-related projects, using technologies like Next.js, React, and

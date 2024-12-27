@@ -12,8 +12,8 @@ const Article = ({ posts }) => {
   return (
     <>
       {posts.map((post, index) => (
-        <div key={index} className="flex sm:justify-center mx-auto h-auto ">
-          <div className="w-[1800px] sm:h-[200px] h-[150px] flex justify-center sm:items-center mb-10 sm:mb-4 sm:justify-between sm:flex-row flex-col">
+        <div key={index} className="flex sm:justify-center mx-auto h-auto">
+          <div className=" w-[1800px] h-auto flex justify-center sm:items-center mb-10 sm:mb-4 sm:justify-between sm:flex-row flex-col">
             <div
               className={`transition duration-500 ease-in-out ${
                 isImageLoaded ? "blur-0" : "blur-lg"
@@ -26,18 +26,19 @@ const Article = ({ posts }) => {
                 height={350}
               />
             </div>
-            <div className=" flex flex-col text-nowrap sm:justify-center h-[125px]">
+            <div className=" flex flex-col text-nowrap sm:justify-center h-auto sm:w-[600px]">
               <Link
                 href={`posts/${slugify(post?.title)}`}
-                className="sm:text-[25px] text-[30px] font-bold hover:underline"
+                className="sm:text-[25px] text-[70px] font-bold hover:underline"
               >
                 {post?.title}
               </Link>
-              <p className="sm:text-[25px] text-[30px]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              <p className="sm:text-[25px] text-[50px] text-wrap">
+                Hi there, I'm Pranshu, aka Brocode! I'm a 24-year-old Software
+                Engineer
               </p>
               <div className="sm:w-[450px]">
-                <p className="sm:text-[25px] text-[30px]">
+                <p className="sm:text-[25px] text-[50px]">
                   {convertDate(post?.created_at)}
                 </p>
               </div>

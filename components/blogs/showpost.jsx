@@ -140,7 +140,7 @@ const ShowPost = ({ post: initialPost }) => {
           return (
             <div
               key={index}
-              className=" mx-auto max-w-[1200px] h-full p-20 flex flex-col gap-3 "
+              className=" mx-auto w-[1200px] sm:max-w-[1200px] h-full p-20 flex flex-col gap-3"
             >
               <div>
                 <h1 className="text-[60px] font-bold">{post?.title}</h1>
