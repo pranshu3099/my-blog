@@ -10,9 +10,11 @@ const ShowComments = ({ commentList }) => {
     <>
       {commentList?.map((comment, index) => {
         return (
-          <div key={index} className="mb-5">
-            <p>{comment?.name ? comment?.name : comment?.user?.name}</p>
-            <p>{comment?.comment}</p>
+          <div key={index} className="mb-5 h-auto">
+            <p className="sm:text-[25px] text-[50px]">
+              {comment?.name ? comment?.name : comment?.user?.name}
+            </p>
+            <p className="sm:text-[25px] text-[50px]">{comment?.comment}</p>
           </div>
         );
       })}

@@ -42,27 +42,27 @@ const Comments = ({ url, post, user }) => {
 
   return (
     <>
-      <div className="flex flex-col">
-        <div className=" h-[40px] flex items-center">
-          <h2 className="text-2xl font-bold">Comment</h2>
+      <div className="flex flex-col h-auto">
+        <div className="flex items-center h-auto">
+          <h2 className="sm:text-2xl text-[90px] font-bold">Comment</h2>
         </div>
-        <div className=" h-[60px] flex items-center">
+        <div className=" h-auto flex items-center">
           <form onSubmit={handleComment}>
             <input
               type="text"
               value={comment}
               placeholder="your comment :-)"
               onChange={(e) => setcomment(e.target.value)}
-              className={`border-b-2 border-blue-600 w-[1050px] border-t-0 border-l-0 border-r-0 focus:outline-none bg-transparent ${
+              className={`border-b-2 sm:text-[25px] text-[60px] border-blue-600 w-[1050px] border-t-0 border-l-0 border-r-0 focus:outline-none bg-transparent ${
                 theme === "dark" ? "text-white" : "text-black"
               }`}
             />
           </form>
           <Image
             src={"/send-2-svgrepo-com.svg"}
-            width={40}
-            height={40}
-            className="relative bottom-3 right-8"
+            width={0}
+            height={0}
+            className="relative bottom-3 right-8 sm:h-[40px] sm:w-[40px] h-[80px] w-[80px]"
             style={{ cursor: "pointer" }}
             alt="comment"
             onClick={handleComment}

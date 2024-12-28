@@ -4,13 +4,13 @@ import Image from "next/image";
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   return (
-    <div className=" flex sm:justify-between sm:items-center justify-between p-4 font-extrabold sm:w-full w-[1200px] mb-1 h-auto">
+    <div className="flex sm:justify-between sm:items-center justify-between p-4 font-extrabold sm:w-full w-[1280px] mb-1 h-auto">
       <div className=" w-1/4 p-2">
         <a href="/">
           <h2 className="sm:text-2xl text-[80px] text-cyan-600">Pranshu's</h2>
         </a>
       </div>
-      <div className=" sm:w-1/4 p-2 w-[450px] flex justify-end items-center h-[100px">
+      <div className=" sm:w-1/4 p-2 w-auto flex justify-end items-center h-auto">
         <ul className="flex flex-row justify-end gap-5 relative">
           <li className="">
             <a
