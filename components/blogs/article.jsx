@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { convertDate } from "@/utility/date";
 import { slugify } from "@/utility/slugify";
+import extractFirstImageSrc from "@/utility/getimage";
 import Image from "next/image";
 import Link from "next/link";
 const Article = ({ posts }) => {
@@ -19,9 +20,13 @@ const Article = ({ posts }) => {
                 isImageLoaded ? "blur-0" : "blur-lg"
               } sm:block hidden`}
             >
+              {/* extractFirstImageSrc(post?.parsed_content) */}
               <Image
-                src="/ijvfue6cl2e33gqzl9a7.webp"
-                alt=""
+                src={
+                  extractFirstImageSrc(post?.parsed_content) ||
+                  "/ijvfue6cl2e33gqzl9a7.webp"
+                }
+                alt={`Cover image for ${post?.title}`}
                 width={250}
                 height={350}
               />
