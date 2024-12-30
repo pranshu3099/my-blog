@@ -1,28 +1,20 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import Head from "next/head";
 import { convertDate } from "@/utility/date";
 import { handleGithubLogin } from "@/utility/oauth";
 import { updateLikes } from "@/utility/likes";
+import { getMetaContent } from "@/utility/meta-content";
 import Comments from "../comments/comments";
 import Footer from "../footer";
 const HTMLRenderer = ({ htmlContent }) => {
-  const cleanedContent = useMemo(() => {
-    return htmlContent
-      .replace(/style=["{]+([^"}]+)["}]+/g, 'style="$1"')
-      .replace(
-        /style="([^"]+)"/g,
-        (match, p1) => `style="${p1.replace(/[="]/g, "").trim()}"`
-      );
-  }, [htmlContent]);
-
   return (
     <div
       className="mt-5 flex flex-col gap-4"
-      dangerouslySetInnerHTML={{ __html: cleanedContent }}
+      dangerouslySetInnerHTML={{ __html: htmlContent }}
     />
   );
 };
-
 const ShowPost = ({ post: initialPost }) => {
   const [post, setPost] = useState(initialPost || []);
   const [authStatus, setAuthStatus] = useState({ status: false, user: null });
@@ -31,6 +23,40 @@ const ShowPost = ({ post: initialPost }) => {
   const [hasLiked, setHasLiked] = useState(false);
   const imageRef = useRef(null);
   const url = process.env.NEXT_PUBLIC_API_URL;
+  const content = getMetaContent(post?.[0]?.posts_id);
+  const meta_content = content?.[0]?.content;
+  useEffect(() => {
+    const ispostLiked = async () => {
+      try {
+        const { user } = authStatus || {};
+        if (
+          !user?.id ||
+          !post?.[0]?.posts_id ||
+          !authStatus?.status ||
+          !post?.length
+        )
+          return;
+        const response = await fetch(
+          `${url}/ispostLiked/${post?.[0]?.posts_id}/users/${user?.id}`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+        if (!response.ok) {
+          console.error(`Error fetching like status: ${response.statusText}`);
+          return;
+        }
+        const result = await response.json();
+        setHasLiked(result?.has_liked || false);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (authStatus?.status && post?.length) {
+      ispostLiked();
+    }
+  }, [authStatus?.status, post?.[0]?.posts_id, authStatus?.user?.id, url]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsImageLoaded(true), 500);
@@ -67,7 +93,7 @@ const ShowPost = ({ post: initialPost }) => {
   useEffect(() => {
     if (!initialPost) {
       const storedPost = JSON.parse(sessionStorage.getItem("post"));
-      if (storedPost) {
+      if (storedPost && post.length === 0) {
         setPost(storedPost);
       }
     }
@@ -81,33 +107,13 @@ const ShowPost = ({ post: initialPost }) => {
     );
   }
 
-  useEffect(() => {
-    const ispostLiked = async () => {
-      try {
-        const { user } = authStatus;
-        const response = await fetch(
-          `${url}/ispostLiked/${post?.[0]?.posts_id}/users/${user?.id}`,
-          {
-            method: "GET",
-            credentials: "include",
-          }
-        );
-        const result = await response.json();
-        const has_liked = result?.has_liked;
-        setHasLiked(has_liked);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    ispostLiked();
-  }, [authStatus]);
-
   const handleLikes = () => {
     try {
       const { user } = authStatus;
+      const imageSrc = imageRef?.current?.src;
+      if (!imageRef?.current || !user) return;
       const add_likes = "addLikes";
       const remove_likes = "removeLikes";
-      const imageSrc = imageRef?.current.src;
       const path = new URL(imageSrc).pathname;
       let current_likes = 0;
       if (imageRef && path === "/heart-svgrepo-com.svg") {
@@ -132,9 +138,21 @@ const ShowPost = ({ post: initialPost }) => {
       console.log(err);
     }
   };
-
   return (
     <>
+      <div className="post-main-container">
+        <Head>
+          <title>{post?.[0]?.title}</title>
+          {meta_content?.map((content, index) => (
+            <meta
+              key={content?.key || index}
+              name={content?.name}
+              property={content?.property}
+              content={content?.content}
+            />
+          ))}
+        </Head>
+      </div>
       {post?.length &&
         post?.map((post, index) => {
           return (
