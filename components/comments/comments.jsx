@@ -68,7 +68,9 @@ const Comments = ({ url, post, user }) => {
             onClick={handleComment}
           />
         </div>
-        <ShowComments commentList={commentList} />
+        <div className="mt-5">
+          <ShowComments commentList={commentList} />
+        </div>
       </div>
     </>
   );
