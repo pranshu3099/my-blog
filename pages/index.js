@@ -3,9 +3,13 @@ import About from "../components/about";
 import Blogs from "../components/blogs/blog";
 import MyProjects from "@/components/projects";
 import Footer from "@/components/footer";
+import Head from "next/head";
 export default function Home({ posts }) {
   return (
     <div>
+      <Head>
+        <title>Pranshu's Blog</title>
+      </Head>
       <Navbar />
       <div className="h-[710px] mx-auto w-[700px] sm:w-full sm:max-w-[1500px]">
         <About />
