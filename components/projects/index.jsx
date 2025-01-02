@@ -25,7 +25,7 @@ const MyProjects = () => {
             <a
               href="https://chat.pranshu.dev/"
               target="_blank"
-              className="font-bold sm:text-[20px] text-[70px]"
+              className="font-bold sm:text-[25px] text-[70px]"
             >
               Doge Chat
             </a>
@@ -39,7 +39,7 @@ const MyProjects = () => {
             <a
               href="https://pranshu3099.github.io/movies-hub/index.html"
               target="_blank"
-              className="font-bold sm:text-[20px] text-[70px]"
+              className="font-bold sm:text-[25px] text-[70px]"
             >
               Movies Hub
             </a>
