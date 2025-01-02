@@ -4,7 +4,8 @@ import Head from "next/head";
 import { convertDate } from "@/utility/date";
 import { handleGithubLogin } from "@/utility/oauth";
 import { updateLikes } from "@/utility/likes";
-import { getMetaContent } from "@/utility/meta-content";
+import { getMetaContent } from "@/utility/meta";
+import { generateMetaTags } from "@/utility/get-meta-content";
 import Comments from "../comments/comments";
 import Footer from "../footer";
 const HTMLRenderer = ({ htmlContent }) => {
@@ -23,8 +24,12 @@ const ShowPost = ({ post: initialPost }) => {
   const [hasLiked, setHasLiked] = useState(false);
   const imageRef = useRef(null);
   const url = process.env.NEXT_PUBLIC_API_URL;
-  const content = getMetaContent(post?.[0]?.posts_id);
-  const meta_content = content?.[0]?.content;
+  const [currentUrl, setCurrentUrl] = useState("");
+  const PrefixText = `Check out this blog on ${post?.[0]?.title}`;
+  useEffect(() => {
+    setCurrentUrl(window.location.href);
+  }, []);
+
   useEffect(() => {
     const ispostLiked = async () => {
       try {
@@ -138,12 +143,25 @@ const ShowPost = ({ post: initialPost }) => {
       console.log(err);
     }
   };
+
+  const copyTextToClipboard = () => {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(window.location.href);
+    }
+  };
+
+  const metaContent = useMemo(() => {
+    if (!post?.[0]?.title) return [];
+    let meta_tags_content = getMetaContent(post?.[0]?.title);
+    return generateMetaTags(meta_tags_content[0], post?.[0]?.title);
+  }, [post]);
+
   return (
     <>
-      <div className="post-main-container">
+      <div>
         <Head>
           <title>{post?.[0]?.title}</title>
-          {meta_content?.map((content, index) => (
+          {metaContent?.map((content, index) => (
             <meta
               key={content?.key || index}
               name={content?.name}
@@ -214,7 +232,12 @@ const ShowPost = ({ post: initialPost }) => {
                 )}
               </div>
               <div className="flex gap-3 items-center">
-                <a href="">
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${PrefixText}.https://6a7c-183-82-160-21.ngrok-free.app/posts/second-blog`}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="share on twitter"
+                >
                   <Image
                     src="/twitter-svgrepo-com.svg"
                     alt="twitter"
@@ -223,7 +246,16 @@ const ShowPost = ({ post: initialPost }) => {
                     className="sm:h-[40px] sm:w-[40px] h-[80px] w-[80px]"
                   />
                 </a>
-                <a href="">
+                <a
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+                    "https://6a7c-183-82-160-21.ngrok-free.app/posts/second-blog"
+                  )}&title=${encodeURIComponent(
+                    post?.[0]?.title
+                  )}&summary=${encodeURIComponent(PrefixText)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="share on linkedin"
+                >
                   <Image
                     src="/linkedin-svgrepo-com.svg"
                     alt="linkedin"
@@ -232,15 +264,14 @@ const ShowPost = ({ post: initialPost }) => {
                     className="sm:h-[40px] sm:w-[40px] h-[80px] w-[80px]"
                   />
                 </a>
-                <a href="">
-                  <Image
-                    src="/link-svgrepo-com.svg"
-                    alt="link"
-                    width={0}
-                    height={0}
-                    className="sm:h-[40px] sm:w-[40px] h-[80px] w-[80px]"
-                  />
-                </a>
+                <Image
+                  src="/link-svgrepo-com.svg"
+                  alt="link"
+                  width={0}
+                  height={0}
+                  className="sm:h-[40px] sm:w-[40px] h-[80px] w-[80px] cursor-pointer"
+                  onClick={copyTextToClipboard}
+                />
               </div>
               {/* <div
                 style={{
