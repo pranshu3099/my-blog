@@ -1,8 +1,18 @@
 import Navbar from "@/components/navbar/layout";
-import { useContext, useReducer } from "react";
+import { useContext, useReducer, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ThemeContext } from "@/context/provider";
 const Login = () => {
+  const url = process.env.NEXT_PUBLIC_API_URL;
+  const { theme } = useContext(ThemeContext);
+  const router = useRouter();
+  useEffect(() => {
+    const bearer = localStorage.getItem("Bearer");
+    if (bearer?.length) {
+      router.push("/create");
+    }
+  }, []);
+
   const reducer = (state, action) => {
     switch (action?.type) {
       case "email":
@@ -14,13 +24,11 @@ const Login = () => {
     }
   };
 
-  const url = process.env.NEXT_PUBLIC_API_URL;
-  const { theme } = useContext(ThemeContext);
   const [state, dispatch] = useReducer(reducer, {
     email: "",
     password: "",
   });
-  const router = useRouter();
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -58,7 +66,7 @@ const Login = () => {
               placeholder="email"
               type="email"
               value={state?.email}
-              class={`border-b-2 border-blue-600 w-[350px] border-t-0 border-l-0 border-r-0 focus:outline-none bg-transparent ${
+              className={`border-b-2 border-blue-600 w-[350px] border-t-0 border-l-0 border-r-0 focus:outline-none bg-transparent ${
                 theme === "dark" ? "text-white" : "text-black"
               }`}
               onChange={(e) => {
@@ -69,7 +77,7 @@ const Login = () => {
               type="password"
               placeholder="password"
               value={state?.password}
-              class={`border-b-2 border-blue-600 w-[350px] border-t-0 border-l-0 border-r-0 focus:outline-none bg-transparent ${
+              className={`border-b-2 border-blue-600 w-[350px] border-t-0 border-l-0 border-r-0 focus:outline-none bg-transparent ${
                 theme === "dark" ? "text-white" : "text-black"
               }`}
               onChange={(e) => {
