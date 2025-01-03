@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { convertDate } from "@/utility/date";
 import { slugify } from "@/utility/slugify";
-import extractFirstImageSrc from "@/utility/getimage";
+import { extractFirstImageSrc } from "@/utility/getimage";
+import { extractFirstParagraphText } from "@/utility/getimage";
 import Image from "next/image";
 import Link from "next/link";
 const Article = ({ posts }) => {
@@ -20,7 +21,6 @@ const Article = ({ posts }) => {
                 isImageLoaded ? "blur-0" : "blur-lg"
               } sm:block hidden`}
             >
-              {/* extractFirstImageSrc(post?.parsed_content) */}
               <Image
                 src={
                   extractFirstImageSrc(post?.parsed_content) ||
@@ -39,8 +39,7 @@ const Article = ({ posts }) => {
                 {post?.title}
               </Link>
               <p className="sm:text-[25px] text-[50px] text-wrap">
-                Hi there, I'm Pranshu, aka Brocode! I'm a 24-year-old Software
-                Engineer
+                {extractFirstParagraphText(post?.parsed_content)}
               </p>
               <div className="sm:w-[450px]">
                 <p className="sm:text-[25px] text-[50px]">
