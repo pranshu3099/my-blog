@@ -37,7 +37,6 @@ const ShowPost = ({ post: initialPost }) => {
   useEffect(() => {
     if (typeof window !== "undefined") setCurrentUrl(window.location.href);
   }, []);
-
   useEffect(() => {
     const ispostLiked = async () => {
       try {
@@ -128,25 +127,17 @@ const ShowPost = ({ post: initialPost }) => {
       const add_likes = "addLikes";
       const remove_likes = "removeLikes";
       const path = new URL(imageSrc).pathname;
-      let current_likes = 0;
       if (imageRef && path === "/heart-svgrepo-com.svg") {
         imageRef.current.src = "/red-heart-svgrepo-com.svg";
-        current_likes = updateLikes(
-          url,
-          post[0]?.posts_id,
-          user?.id,
-          add_likes
+        updateLikes(url, post[0]?.posts_id, user?.id, add_likes).then((data) =>
+          setLikes(data)
         );
       } else {
         imageRef.current.src = "/heart-svgrepo-com.svg";
-        current_likes = updateLikes(
-          url,
-          post[0]?.posts_id,
-          user?.id,
-          remove_likes
+        updateLikes(url, post[0]?.posts_id, user?.id, remove_likes).then(
+          (data) => setLikes(data)
         );
       }
-      setLikes(current_likes);
     } catch (err) {
       console.log(err);
     }
@@ -157,21 +148,22 @@ const ShowPost = ({ post: initialPost }) => {
       navigator.clipboard.writeText(window.location.href);
     }
   };
-
   return (
     <>
       <div>
-        <Head>
-          <title>{post?.[0]?.title}</title>
-          {metaContent?.map((content, index) => (
-            <meta
-              key={content?.key || index}
-              name={content?.name}
-              property={content?.property}
-              content={content?.content}
-            />
-          ))}
-        </Head>
+        {post?.length && (
+          <Head>
+            <title>{post?.[0]?.title}</title>
+            {metaContent?.map((content, index) => (
+              <meta
+                key={content?.key || index}
+                name={content?.name}
+                property={content?.property}
+                content={content?.content}
+              />
+            ))}
+          </Head>
+        )}
       </div>
       {post?.length &&
         post?.map((post, index) => {
