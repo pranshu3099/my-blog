@@ -1,6 +1,6 @@
 const meta_content = [
   {
-    blog_title: "second Blog",
+    blog_title: "Bun vs Node",
     title: "A Deep Dive into Bun vs. Node: Pros, Cons, and Use Cases",
     description:
       "Considering Bun or Node.js for your next project? We've got you covered with an extensive comparison. Dive into the details and choose the right tool for your needs.",

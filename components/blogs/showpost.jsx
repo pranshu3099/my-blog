@@ -35,7 +35,7 @@ const ShowPost = ({ post: initialPost }) => {
     return [];
   }, [post]);
   useEffect(() => {
-    setCurrentUrl(window.location.href);
+    if (window !== "undefined") setCurrentUrl(window.location.href);
   }, []);
 
   useEffect(() => {
@@ -235,7 +235,7 @@ const ShowPost = ({ post: initialPost }) => {
               </div>
               <div className="flex gap-3 items-center">
                 <a
-                  href={`https://twitter.com/intent/tweet?text=${PrefixText}.${currentUrl}/posts/second-blog`}
+                  href={`https://twitter.com/intent/tweet?text=${PrefixText}.${currentUrl}`}
                   target="_blank"
                   rel="noopener"
                   aria-label="share on twitter"
@@ -250,7 +250,7 @@ const ShowPost = ({ post: initialPost }) => {
                 </a>
                 <a
                   href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-                    `${currentUrl}/posts/second-blog`
+                    `${currentUrl}`
                   )}&title=${encodeURIComponent(
                     post?.[0]?.title
                   )}&summary=${encodeURIComponent(PrefixText)}`}
