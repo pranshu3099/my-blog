@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 const Footer = () => {
@@ -7,7 +8,7 @@ const Footer = () => {
         <p>Made by Pranshu</p>
       </div>
       <div className="flex gap-3 items-center">
-        <a href="https://github.com/pranshu3099" target="_blank">
+        <Link href="https://github.com/pranshu3099" target="_blank">
           <Image
             src="/github-142-svgrepo-com (1).svg"
             alt="twitter"
@@ -15,8 +16,8 @@ const Footer = () => {
             height={0}
             className="sm:h-[40px] sm:w-[40px] h-[80px] w-[80px]"
           />
-        </a>
-        <a href="https://x.com/brocode08071934" target="_blank">
+        </Link>
+        <Link href="https://x.com/brocode08071934" target="_blank">
           <Image
             src="/twitter-svgrepo-com.svg"
             alt="twitter"
@@ -24,8 +25,8 @@ const Footer = () => {
             height={0}
             className="sm:h-[40px] sm:w-[40px] h-[80px] w-[80px]"
           />
-        </a>
-        <a href="https://www.linkedin.com/in/pranshu-cse/" target="_blank">
+        </Link>
+        <Link href="https://www.linkedin.com/in/pranshu-cse/" target="_blank">
           <Image
             src="/linkedin-svgrepo-com.svg"
             alt="linkedin"
@@ -33,7 +34,7 @@ const Footer = () => {
             height={0}
             className="sm:h-[40px] sm:w-[40px] h-[80px] w-[80px]"
           />
-        </a>
+        </Link>
       </div>
     </div>
   );
