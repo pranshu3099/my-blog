@@ -29,7 +29,10 @@ const ShowPost = ({ post: initialPost }) => {
   const metaContent = useMemo(() => {
     if (!post?.[0]?.title) return [];
     let meta_tags_content = getMetaContent(post?.[0]?.title);
-    return generateMetaTags(meta_tags_content[0], post?.[0]?.title);
+    if (meta_tags_content?.length) {
+      return generateMetaTags(meta_tags_content[0], post?.[0]?.title);
+    }
+    return [];
   }, [post]);
   useEffect(() => {
     setCurrentUrl(window.location.href);
@@ -232,7 +235,7 @@ const ShowPost = ({ post: initialPost }) => {
               </div>
               <div className="flex gap-3 items-center">
                 <a
-                  href={`https://twitter.com/intent/tweet?text=${PrefixText}.https://6a7c-183-82-160-21.ngrok-free.app/posts/second-blog`}
+                  href={`https://twitter.com/intent/tweet?text=${PrefixText}.${currentUrl}/posts/second-blog`}
                   target="_blank"
                   rel="noopener"
                   aria-label="share on twitter"
@@ -247,7 +250,7 @@ const ShowPost = ({ post: initialPost }) => {
                 </a>
                 <a
                   href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-                    "https://6a7c-183-82-160-21.ngrok-free.app/posts/second-blog"
+                    `${currentUrl}/posts/second-blog`
                   )}&title=${encodeURIComponent(
                     post?.[0]?.title
                   )}&summary=${encodeURIComponent(PrefixText)}`}
