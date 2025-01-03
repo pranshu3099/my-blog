@@ -26,16 +26,16 @@ const ShowPost = ({ post: initialPost }) => {
   const url = process.env.NEXT_PUBLIC_API_URL;
   const [currentUrl, setCurrentUrl] = useState("");
   const PrefixText = `Check out this blog on ${post?.[0]?.title}`;
-  const metaContent = useMemo(() => {
-    if (!post?.[0]?.title) return [];
-    let meta_tags_content = getMetaContent(post?.[0]?.title);
-    if (meta_tags_content?.length) {
-      return generateMetaTags(meta_tags_content[0], post?.[0]?.title);
-    }
-    return [];
-  }, [post]);
+  // const metaContent = useMemo(() => {
+  //   if (!post?.[0]?.title) return [];
+  //   let meta_tags_content = getMetaContent(post?.[0]?.title);
+  //   if (meta_tags_content?.length) {
+  //     return generateMetaTags(meta_tags_content[0], post?.[0]?.title);
+  //   }
+  //   return [];
+  // }, [post]);
   useEffect(() => {
-    if (window !== "undefined") setCurrentUrl(window.location.href);
+    if (typeof window !== "undefined") setCurrentUrl(window.location.href);
   }, []);
 
   useEffect(() => {
@@ -161,7 +161,7 @@ const ShowPost = ({ post: initialPost }) => {
   return (
     <>
       <div>
-        <Head>
+        {/* <Head>
           <title>{post?.[0]?.title}</title>
           {metaContent?.map((content, index) => (
             <meta
@@ -171,7 +171,7 @@ const ShowPost = ({ post: initialPost }) => {
               content={content?.content}
             />
           ))}
-        </Head>
+        </Head> */}
       </div>
       {post?.length &&
         post?.map((post, index) => {
@@ -275,168 +275,8 @@ const ShowPost = ({ post: initialPost }) => {
                   onClick={copyTextToClipboard}
                 />
               </div>
-              {/* <div
-                style={{
-                  transition: "all 0.5s ease-in-out",
-                  filter: isImageLoaded ? "blur(0)" : "blur(8px)",
-                }}
-              >
-                <Image
-                  src="/blue_lake_5-wallpaper-2048x768.jpg"
-                  alt="Blog Image"
-                  width={1200}
-                  height={800}
-                  sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px"
-                />
-              </div> */}
+
               <HTMLRenderer htmlContent={post?.parsed_content} />
-              {/* <div className="mt-5 flex flex-col gap-4 h-auto">
-                <h1 className="sm:text-2xl text-[90px] font-bold border-b-4 border-cyan-800">
-                  Bun the new js run time
-                </h1>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  Bun is a superfast all in one toolkit for javascript an
-                  typescript apps. Bun streamline the dev process making it
-                  smoother and more efficient, it is not just a runtime but also
-                  a bundler package manager and test runner.
-                </p>
-                <h2 className=" sm:text-2xl text-[90px] font-bold border-b-4 border-cyan-800">
-                  Bun vs Node as a JavaScript Runtime
-                </h2>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  A js run time is an environment which provides all the
-                  necessary components in order to use and run a js program.Both
-                  node and bun are a javascript run time. Node js is written in
-                  c++ and Bun is written in general purpose programming language
-                  zig.
-                </p>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  A javascript Engine is basically a program that converts a js
-                  program in to machine code. Node js uses Google's v8 engine
-                  and Bun uses Javascript core which is an opensource developed
-                  by apple for safari.
-                </p>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  Both v8 and JSC (Javascript core) works very differently. jsc
-                  prioritize faster start times and reduced memory usage with a
-                  slightly slower execution time. On the other hand v8
-                  prioritize fast execution with more run time optimization
-                  which may lead to more memory usage whhich makes Bun more
-                  efficient and smoother
-                </p>
-                <h2 className="sm:text-2xl text-[90px] font-bold border-b-4 border-cyan-800">
-                  Transpiler
-                </h2>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  To execute typescript in node env external dependecies are
-                  required. one common approach is the build step to transpile
-                  ts into js and then run resulting js code(npm i -D typescript
-                  ts-node) Bun comes with a javascript transpiler integrated
-                  into the runtime directlly run js ts jsx or tsx file.This is
-                  also a big reason for using bun over node.
-                </p>
-                <h2 className="sm:text-2xl text-[90px] font-bold border-b-4 border-cyan-800">
-                  Module system
-                </h2>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  A module system allows developers to organize code into
-                  reusable segments. Javascript mainly uses common js and ESM
-                  i.e Ecmascript module.
-                </p>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  Common js is used on server such as node js server uses
-                  require or module.exports for synchronous module handelling.
-                  Esm for browsers uses import and export statement providing
-                  more static and asynchronous approach optimized for browser
-                  builds.
-                </p>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  The main point to note here is that you can not use module and
-                  import statement side by side in the same file and one more
-                  thing to use import in a file you should create a file using
-                  mjs extension or set type to module in package.json file which
-                  is in root directory in your project.
-                </p>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  On the other hand bun support both common js and esm without
-                  any special configuration i.e you can use both import and
-                  require in same file.
-                </p>
-                <h2 className="sm:text-2xl text-[90px] font-bold border-b-4 border-cyan-800">
-                  Web Api's
-                </h2>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  Integral to browser based application and offer tools like
-                  fetch and websocket for web application.Earlier fetch was not
-                  supported in node js developers have to rely on packages such
-                  as node-fetch but from node js v18 there is experimental
-                  support for the fetch api but bun has built support to fetch.
-                  Dev can directly use fetch request response.
-                </p>
-                <h2 className="sm:text-2xl text-[90px] font-bold border-b-4 border-cyan-800">
-                  Hot reloading
-                </h2>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  Hot Reloading is that feature that instantly reflects code
-                  changes in the application without the need of full restart in
-                  node js we have a couple of options for hot reloading for
-                  example nodemon that hard restarts the entire process and from
-                  node18 we have --watch flag for the same.
-                </p>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  Bun has a --hot flag. unlike the node js methods that might
-                  require a full process restart bun reloads your code in place
-                  without terminating the old process provides a smoother
-                  development experience.
-                </p>
-                <h2 className="sm:text-2xl text-[90px] font-bold border-b-4 border-cyan-800">
-                  Node js compatibility
-                </h2>
-                <ul
-                  className="h-auto sm:text-[25px] text-[50px]"
-                  style={{ listStyleType: "initial" }}
-                >
-                  <li>Bun is actually drop in replacement for node.js</li>
-                  <li>
-                    You can integrate bun with node js app without any
-                    modification
-                  </li>
-                  <li>
-                    There is already support for built-in node js module such as
-                    fs path and net
-                  </li>
-                  <li>
-                    Adherence to the nodejs module resolution algorithm,
-                    including the familiar node_modules structure
-                  </li>
-                </ul>
-                <h2 className="sm:text-2xl text-[90px] font-bold border-b-4 border-cyan-800">
-                  Bundler
-                </h2>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  Bundling is the process of taking multiple js files and
-                  merging them into one or more optimized bundles.Process may
-                  inivolve transformation such as converting typescript to
-                  javascript or minifying the code to reduce its size. In node
-                  js eco system bundelling is typically handeled by third party
-                  tools such as webpack rollup parcel rather than node js
-                  itself.
-                </p>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  Bun on the other hand is designed to bundle js and ts code for
-                  various platfroms.To bundle with bun use simple command bun
-                  build ./index.ts --outdir ./build.
-                </p>
-                <h2 className="sm:text-2xl text-[90px] font-bold border-b-4 border-cyan-800">
-                  Bundler
-                </h2>
-                <p className="h-auto sm:text-[25px] text-[50px]">
-                  Bun boasts installation speed which is faster than npm. It
-                  acheives this by the help of global module cache, eliminating
-                  redundant downloads from the npm registry Bun enusres fastest
-                  sysytem call and it also gives optimal performance.
-                </p>
-              </div> */}
 
               {authStatus?.status && (
                 <Comments url={url} user={authStatus?.user} post={post} />
