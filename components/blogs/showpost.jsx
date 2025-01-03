@@ -26,14 +26,14 @@ const ShowPost = ({ post: initialPost }) => {
   const url = process.env.NEXT_PUBLIC_API_URL;
   const [currentUrl, setCurrentUrl] = useState("");
   const PrefixText = `Check out this blog on ${post?.[0]?.title}`;
-  // const metaContent = useMemo(() => {
-  //   if (!post?.[0]?.title) return [];
-  //   let meta_tags_content = getMetaContent(post?.[0]?.title);
-  //   if (meta_tags_content?.length) {
-  //     return generateMetaTags(meta_tags_content[0], post?.[0]?.title);
-  //   }
-  //   return [];
-  // }, [post]);
+  const metaContent = useMemo(() => {
+    if (!post?.[0]?.title) return [];
+    let meta_tags_content = getMetaContent(post?.[0]?.title);
+    if (meta_tags_content?.length) {
+      return generateMetaTags(meta_tags_content[0], post?.[0]?.title);
+    }
+    return [];
+  }, [post]);
   useEffect(() => {
     if (typeof window !== "undefined") setCurrentUrl(window.location.href);
   }, []);
@@ -161,7 +161,7 @@ const ShowPost = ({ post: initialPost }) => {
   return (
     <>
       <div>
-        {/* <Head>
+        <Head>
           <title>{post?.[0]?.title}</title>
           {metaContent?.map((content, index) => (
             <meta
@@ -171,7 +171,7 @@ const ShowPost = ({ post: initialPost }) => {
               content={content?.content}
             />
           ))}
-        </Head> */}
+        </Head>
       </div>
       {post?.length &&
         post?.map((post, index) => {
