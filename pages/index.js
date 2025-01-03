@@ -8,7 +8,7 @@ export default function Home({ posts }) {
   return (
     <div>
       <Head>
-        <title>Pranshu's Blog</title>
+        <title>Pranshu&apos;s Blog</title>
       </Head>
       <Navbar />
       <div className="h-[710px] mx-auto w-[700px] sm:w-full sm:max-w-[1500px]">
