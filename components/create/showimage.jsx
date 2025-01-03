@@ -1,3 +1,4 @@
+import Image from "next/image";
 const ShowImage = ({ list, removelist, imgurl, preview, copyurl }) => {
   const handleRemoveurl = (img, list_img) => {
     removelist(img, list_img);
@@ -12,7 +13,13 @@ const ShowImage = ({ list, removelist, imgurl, preview, copyurl }) => {
         return (
           <>
             <li key={index} value={index} className="imglist">
-              <img src={img} alt="img" className="w-[95px]" />
+              <Image
+                src={img}
+                alt="img"
+                className="w-[95px]"
+                width={95}
+                height={95}
+              />
             </li>
             <span
               onClick={(e) => {
@@ -33,18 +40,19 @@ const ShowImage = ({ list, removelist, imgurl, preview, copyurl }) => {
               {copyurl[index]?.path}
             </p>
             {copyurl.length ? (
-              <img
+              <Image
                 src="/link-svgrepo-com.svg"
                 alt=""
                 style={{
                   cursor: "pointer",
-                  width: "17px",
                   margin: "6px",
                 }}
                 id="imgurl"
                 onClick={(e) => {
                   handleurl(e);
                 }}
+                height={60}
+                width={30}
               />
             ) : (
               ""

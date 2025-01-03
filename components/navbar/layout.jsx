@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "@/context/provider";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Image from "next/image";
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [bearer, setBearer] = useState(null);
@@ -20,7 +21,9 @@ const Navbar = () => {
     <div className="flex sm:justify-between sm:items-center justify-between p-4 font-extrabold sm:w-full w-[1280px] mb-1 h-auto">
       <div className=" w-1/4 p-2">
         <Link href="/">
-          <h2 className="sm:text-2xl text-[80px] text-cyan-600">Pranshu's</h2>
+          <h2 className="sm:text-2xl text-[80px] text-cyan-600">
+            Pranshu&apos;s
+          </h2>
         </Link>
       </div>
       <div className=" sm:w-1/4 p-2 w-auto flex justify-end items-center h-auto">
@@ -54,16 +57,20 @@ const Navbar = () => {
           )}
           <button onClick={toggleTheme}>
             {theme === "light" ? (
-              <img
+              <Image
                 src={"/sun-light-theme-svgrepo-com.svg"}
                 alt="sun"
                 className="sm:w-[25px] sm:h-[25px] w-[90px] h-[50px]"
+                height={0}
+                width={0}
               />
             ) : (
-              <img
+              <Image
                 src={"/moon-dark-theme-svgrepo-com.svg"}
                 alt="moon"
                 className="sm:w-[25px] sm:h-[25px] w-[90px] h-[50px]"
+                height={0}
+                width={0}
               />
             )}
           </button>
