@@ -26,6 +26,11 @@ const ShowPost = ({ post: initialPost }) => {
   const url = process.env.NEXT_PUBLIC_API_URL;
   const [currentUrl, setCurrentUrl] = useState("");
   const PrefixText = `Check out this blog on ${post?.[0]?.title}`;
+  const metaContent = useMemo(() => {
+    if (!post?.[0]?.title) return [];
+    let meta_tags_content = getMetaContent(post?.[0]?.title);
+    return generateMetaTags(meta_tags_content[0], post?.[0]?.title);
+  }, [post]);
   useEffect(() => {
     setCurrentUrl(window.location.href);
   }, []);
@@ -149,12 +154,6 @@ const ShowPost = ({ post: initialPost }) => {
       navigator.clipboard.writeText(window.location.href);
     }
   };
-
-  const metaContent = useMemo(() => {
-    if (!post?.[0]?.title) return [];
-    let meta_tags_content = getMetaContent(post?.[0]?.title);
-    return generateMetaTags(meta_tags_content[0], post?.[0]?.title);
-  }, [post]);
 
   return (
     <>
