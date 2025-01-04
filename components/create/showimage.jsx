@@ -9,7 +9,7 @@ const ShowImage = ({ list, removelist, imgurl, preview, copyurl }) => {
 
   return (
     <ul className="flex items-center gap-5 flex-wrap">
-      {preview.length &&
+      {preview.length !== 0 &&
         preview?.map((img, index) => {
           return (
             <>
