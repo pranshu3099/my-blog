@@ -41,8 +41,8 @@ const ShowPost = ({ post: initialPost }) => {
     if (!initialPost) {
       const storedPost = JSON.parse(localStorage.getItem("post"));
       if (storedPost && post.length === 0) {
-        setPost(storedPost[0]);
-        setLikes(storedPost[0]?.[0]?.likes_count);
+        setPost(storedPost);
+        setLikes(storedPost[0]?.likes_count);
       }
     }
   }, [initialPost, post.length, post]);
@@ -190,7 +190,7 @@ const ShowPost = ({ post: initialPost }) => {
               {!authStatus?.status && (
                 <button
                   onClick={() => {
-                    handleGithubLogin(post);
+                    handleGithubLogin(postItem);
                   }}
                   type="button"
                   className=" text-white w-[400px] sm:w-[200px] hover:bg-blue-800 transition duration-300 bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-[30px] p-5 sm:text-sm sm:px-5 sm:py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 me-2 mb-2"
@@ -254,7 +254,7 @@ const ShowPost = ({ post: initialPost }) => {
                   href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
                     `${currentUrl}`
                   )}&title=${encodeURIComponent(
-                    post?.[0]?.title
+                    postItem?.[0]?.title
                   )}&summary=${encodeURIComponent(PrefixText)}`}
                   target="_blank"
                   rel="noopener noreferrer"
