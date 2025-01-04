@@ -20,7 +20,7 @@ const ShowPost = ({ post: initialPost }) => {
   const [post, setPost] = useState(initialPost || []);
   const [authStatus, setAuthStatus] = useState({ status: false, user: null });
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const [likes, setLikes] = useState(0);
+  const [likes, setLikes] = useState(post[0]?.likes_count || 0);
   const [hasLiked, setHasLiked] = useState(false);
   const imageRef = useRef(null);
   const url = process.env.NEXT_PUBLIC_API_URL;
@@ -119,30 +119,39 @@ const ShowPost = ({ post: initialPost }) => {
     );
   }
 
-  const handleLikes = () => {
+  const handleLikes = async () => {
     try {
       const { user } = authStatus;
       const imageSrc = imageRef?.current?.src;
       if (!imageRef?.current || !user) return;
       const add_likes = "addLikes";
       const remove_likes = "removeLikes";
+      let current_likes = 0;
       const path = new URL(imageSrc).pathname;
       if (imageRef && path === "/heart-svgrepo-com.svg") {
         imageRef.current.src = "/red-heart-svgrepo-com.svg";
-        updateLikes(url, post[0]?.posts_id, user?.id, add_likes).then((data) =>
-          setLikes(data)
+        const response = await updateLikes(
+          url,
+          post[0]?.posts_id,
+          user?.id,
+          add_likes
         );
+        current_likes = response;
       } else {
         imageRef.current.src = "/heart-svgrepo-com.svg";
-        updateLikes(url, post[0]?.posts_id, user?.id, remove_likes).then(
-          (data) => setLikes(data)
+        const response = await updateLikes(
+          url,
+          post[0]?.posts_id,
+          user?.id,
+          remove_likes
         );
+        current_likes = response;
       }
+      setLikes(current_likes);
     } catch (err) {
       console.log(err);
     }
   };
-
   const copyTextToClipboard = () => {
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(window.location.href);
@@ -221,7 +230,7 @@ const ShowPost = ({ post: initialPost }) => {
                       onClick={handleLikes}
                       className="sm:h-[40px] sm:w-[40px] h-[80px] w-[80px]"
                     />
-                    <p>{likes ? likes : post?.likes_count}</p>
+                    <p>{likes}</p>
                   </div>
                 )}
               </div>
