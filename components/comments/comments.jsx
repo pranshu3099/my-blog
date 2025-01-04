@@ -4,7 +4,7 @@ import Image from "next/image";
 import ShowComments from "./showcomments";
 const Comments = ({ url, post, user }) => {
   const [comment, setcomment] = useState("");
-  const [commentList, setCommentList] = useState([]);
+  const [commentList, setCommentList] = useState(post?.comments || []);
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
