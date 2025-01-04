@@ -38,10 +38,8 @@ const ShowPost = ({ post: initialPost }) => {
     if (typeof window !== "undefined") setCurrentUrl(window.location.href);
   }, []);
   useEffect(() => {
-    console.log("initialPost", initialPost);
     if (initialPost?.[0] === null || initialPost === "undefined") {
       const storedPost = JSON.parse(localStorage.getItem("post"));
-      console.log("storedPost", storedPost, "post", post);
       if (storedPost.length > 0 && (post.length === 0 || post?.[0] === null)) {
         setPost(storedPost);
         setLikes(storedPost[0]?.likes_count);

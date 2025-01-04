@@ -3,7 +3,6 @@ import { ThemeContext } from "@/context/provider";
 import Image from "next/image";
 import ShowComments from "./showcomments";
 const Comments = ({ url, post, user }) => {
-  console.log(post);
   const [comment, setcomment] = useState("");
   const [commentList, setCommentList] = useState(
     Array.isArray(post?.[0]?.comments) ? post?.[0]?.comments : []
@@ -43,7 +42,7 @@ const Comments = ({ url, post, user }) => {
     } else {
       let data = {
         user_id: user?.id,
-        posts_id: post?.posts_id,
+        posts_id: post?.[0]?.posts_id,
         comment,
       };
 
