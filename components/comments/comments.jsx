@@ -20,14 +20,16 @@ const Comments = ({ url, post, user }) => {
           credentials: "include",
         });
         const result = await res.json();
-        setCommentList(Array.isArray(result?.comments) ? result?.comments : []);
+        console.log(result);
+        // setCommentList(Array.isArray(result?.comments) ? result?.comments : []);
+        setCommentList(Array.isArray(result) ? result : []);
       } catch (err) {
         console.log(err);
         setCommentList([]);
       }
     };
     getComments();
-  }, [comment]);
+  }, []);
 
   const checkForSpaces = () => {
     let trimmedText = comment;

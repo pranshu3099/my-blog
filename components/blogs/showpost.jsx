@@ -109,6 +109,7 @@ const ShowPost = ({ post: initialPost }) => {
         setPost(storedPost);
       }
     }
+    return () => localStorage.removeItem("tempPost");
   }, [initialPost, post.length]);
 
   if (!post || post?.length === 0) {
