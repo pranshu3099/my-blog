@@ -116,7 +116,7 @@ const ShowPost = ({ post: initialPost }) => {
 
   if (!post || post?.length === 0) {
     return (
-      <div className="text-center mt-20">
+      <div className="text-center mt-20 sm:text-[16px] text-[50px]">
         <h2>Loading posts</h2>
       </div>
     );
@@ -177,7 +177,7 @@ const ShowPost = ({ post: initialPost }) => {
           </Head>
         )}
       </div>
-      {post?.length &&
+      {post?.length > 0 &&
         post?.map((postItem, index) => {
           return (
             <div
