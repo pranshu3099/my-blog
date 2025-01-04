@@ -41,12 +41,11 @@ const ShowPost = ({ post: initialPost }) => {
     if (!initialPost) {
       const storedPost = JSON.parse(localStorage.getItem("post"));
       if (storedPost && post.length === 0) {
-        setPost(storedPost);
-        setLikes(storedPost[0]?.likes_count);
+        setPost(storedPost[0]);
+        setLikes(storedPost[0]?.[0]?.likes_count);
       }
     }
-    return () => localStorage.removeItem("tempPost");
-  }, [initialPost, post.length]);
+  }, [initialPost, post.length, post]);
 
   useEffect(() => {
     const ispostLiked = async () => {
