@@ -39,7 +39,7 @@ const ShowPost = ({ post: initialPost }) => {
   }, []);
   useEffect(() => {
     console.log("initialPost", initialPost);
-    if (!(initialPost?.[0] === null) || initialPost === "undefined") {
+    if (initialPost?.[0] === null || initialPost === "undefined") {
       const storedPost = JSON.parse(localStorage.getItem("post"));
       console.log("storedPost", storedPost);
       if (storedPost && post.length === 0) {
