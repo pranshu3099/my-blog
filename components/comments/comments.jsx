@@ -1,11 +1,30 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "@/context/provider";
 import Image from "next/image";
 import ShowComments from "./showcomments";
 const Comments = ({ url, post, user }) => {
   const [comment, setcomment] = useState("");
-  const [commentList, setCommentList] = useState(post?.comments || []);
+  const [commentList, setCommentList] = useState([]);
   const { theme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    const getComments = async () => {
+      try {
+        const res = await fetch(`${url}/getcomments/${post?.posts_id}`, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        });
+        const result = await res.json();
+        setCommentList(result);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getComments();
+  }, []);
 
   const checkForSpaces = () => {
     let trimmedText = comment;
