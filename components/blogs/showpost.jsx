@@ -41,8 +41,8 @@ const ShowPost = ({ post: initialPost }) => {
     console.log("initialPost", initialPost);
     if (initialPost?.[0] === null || initialPost === "undefined") {
       const storedPost = JSON.parse(localStorage.getItem("post"));
+      console.log("storedPost", storedPost, "post", post);
       if (storedPost.length > 0 && post.length === 0) {
-        console.log("storedPost", storedPost);
         setPost(storedPost);
         setLikes(storedPost[0]?.likes_count);
       }
