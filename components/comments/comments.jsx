@@ -3,16 +3,17 @@ import { ThemeContext } from "@/context/provider";
 import Image from "next/image";
 import ShowComments from "./showcomments";
 const Comments = ({ url, post, user }) => {
+  console.log(post);
   const [comment, setcomment] = useState("");
   const [commentList, setCommentList] = useState(
-    Array.isArray(post?.comments) ? post?.comments : []
+    Array.isArray(post?.[0]?.comments) ? post?.[0]?.comments : []
   );
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const getComments = async () => {
       try {
-        const res = await fetch(`${url}/getcomments/${post?.posts_id}`, {
+        const res = await fetch(`${url}/getcomments/${post?.[0]?.posts_id}`, {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",

@@ -177,7 +177,7 @@ const ShowPost = ({ post: initialPost }) => {
         )}
       </div>
       {post?.length &&
-        post?.map((post, index) => {
+        post?.map((postItem, index) => {
           return (
             <div
               key={index}
@@ -185,7 +185,7 @@ const ShowPost = ({ post: initialPost }) => {
             >
               <div>
                 <h1 className="sm:text-[60px] text-[120px] font-bold h-auto">
-                  {post?.title}
+                  {postItem?.title}
                 </h1>
               </div>
               {!authStatus?.status && (
@@ -214,7 +214,7 @@ const ShowPost = ({ post: initialPost }) => {
               )}
               <div className=" flex justify-between h-auto items-center">
                 <p className="sm:text-[16px] text-[50px]">
-                  {convertDate(post?.created_at)}
+                  {convertDate(postItem?.created_at)}
                 </p>
                 {authStatus?.status && (
                   <div className=" w-[250px] gap-5 flex items-center">
@@ -279,8 +279,7 @@ const ShowPost = ({ post: initialPost }) => {
                 />
               </div>
 
-              <HTMLRenderer htmlContent={post?.parsed_content} />
-
+              <HTMLRenderer htmlContent={postItem?.parsed_content} />
               {authStatus?.status && (
                 <Comments url={url} user={authStatus?.user} post={post} />
               )}
