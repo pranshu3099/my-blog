@@ -38,8 +38,8 @@ const ShowPost = ({ post: initialPost }) => {
     if (typeof window !== "undefined") setCurrentUrl(window.location.href);
   }, []);
   useEffect(() => {
-    console.log(initialPost);
-    if (!(initialPost?.[0] === null)) {
+    console.log("initialPost", initialPost);
+    if (!(initialPost?.[0] === null) || initialPost === "undefined") {
       const storedPost = JSON.parse(localStorage.getItem("post"));
       console.log("storedPost", storedPost);
       if (storedPost && post.length === 0) {
