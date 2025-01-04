@@ -18,6 +18,7 @@ const HTMLRenderer = ({ htmlContent }) => {
 };
 const ShowPost = ({ post: initialPost }) => {
   const [post, setPost] = useState(initialPost || []);
+  console.log(post);
   const [authStatus, setAuthStatus] = useState({ status: false, user: null });
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [likes, setLikes] = useState(post[0]?.likes_count || 0);
