@@ -24,7 +24,7 @@ const Comments = ({ url, post, user }) => {
       }
     };
     getComments();
-  }, []);
+  }, [comment]);
 
   const checkForSpaces = () => {
     let trimmedText = comment;
