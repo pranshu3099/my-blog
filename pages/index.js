@@ -33,6 +33,7 @@ export async function getStaticProps() {
       props: {
         posts: result,
       },
+      revalidate: 10,
     };
   } catch (err) {
     console.log(err);

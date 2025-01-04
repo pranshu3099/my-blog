@@ -14,10 +14,14 @@ const ShowComments = ({ commentList }) => {
         commentList?.map((comment, index) => {
           return (
             <div key={index} className="mb-5 h-auto">
-              <p className="sm:text-[25px] text-[50px]">
-                {comment?.name ? comment?.name : comment?.user?.name}
-              </p>
-              <p className="sm:text-[25px] text-[50px]">{comment?.comment}</p>
+              <div>
+                <p className="sm:text-[25px] text-[50px]">
+                  {comment?.name ? comment?.name : comment?.user?.name}
+                </p>
+              </div>
+              <div>
+                <p className="sm:text-[25px] text-[50px]">{comment?.comment}</p>
+              </div>
             </div>
           );
         })}
