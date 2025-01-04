@@ -40,6 +40,7 @@ const ShowPost = ({ post: initialPost }) => {
   useEffect(() => {
     if (!initialPost) {
       const storedPost = JSON.parse(localStorage.getItem("post"));
+      console.log("storedPost", storedPost);
       if (storedPost && post.length === 0) {
         setPost(storedPost);
         setLikes(storedPost[0]?.likes_count);
