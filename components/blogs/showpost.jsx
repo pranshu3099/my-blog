@@ -116,8 +116,8 @@ const ShowPost = ({ post: initialPost }) => {
 
   if (!post || post?.length === 0) {
     return (
-      <div className="text-center mt-20 sm:text-[16px] text-[50px]">
-        <h2>Loading posts</h2>
+      <div className="text-center mt-20">
+        <p className="sm:text-[25px] text-[50px] font-bold">Loading posts</p>
       </div>
     );
   }
