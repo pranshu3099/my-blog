@@ -20,7 +20,6 @@ const Comments = ({ url, post, user }) => {
           credentials: "include",
         });
         const result = await res.json();
-        console.log(result);
         // setCommentList(Array.isArray(result?.comments) ? result?.comments : []);
         setCommentList(Array.isArray(result) ? result : []);
       } catch (err) {

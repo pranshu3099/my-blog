@@ -38,6 +38,17 @@ const ShowPost = ({ post: initialPost }) => {
     if (typeof window !== "undefined") setCurrentUrl(window.location.href);
   }, []);
   useEffect(() => {
+    if (!initialPost) {
+      const storedPost = JSON.parse(localStorage.getItem("post"));
+      if (storedPost && post.length === 0) {
+        setPost(storedPost);
+        setLikes(storedPost[0]?.likes_count);
+      }
+    }
+    return () => localStorage.removeItem("tempPost");
+  }, [initialPost, post.length]);
+
+  useEffect(() => {
     const ispostLiked = async () => {
       try {
         const { user } = authStatus || {};
@@ -101,16 +112,6 @@ const ShowPost = ({ post: initialPost }) => {
     };
     checkValidity();
   }, []);
-
-  useEffect(() => {
-    if (!initialPost) {
-      const storedPost = JSON.parse(localStorage.getItem("post"));
-      if (storedPost && post.length === 0) {
-        setPost(storedPost);
-      }
-    }
-    return () => localStorage.removeItem("tempPost");
-  }, [initialPost, post.length]);
 
   if (!post || post?.length === 0) {
     return (
