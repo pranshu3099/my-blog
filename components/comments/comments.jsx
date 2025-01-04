@@ -3,8 +3,11 @@ import { ThemeContext } from "@/context/provider";
 import Image from "next/image";
 import ShowComments from "./showcomments";
 const Comments = ({ url, post, user }) => {
+  console.log(post);
   const [comment, setcomment] = useState("");
-  const [commentList, setCommentList] = useState(post?.comments || []);
+  const [commentList, setCommentList] = useState(
+    Array.isArray(post?.comments) ? post?.comments : []
+  );
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
@@ -18,9 +21,10 @@ const Comments = ({ url, post, user }) => {
           credentials: "include",
         });
         const result = await res.json();
-        setCommentList(result);
+        setCommentList(Array.isArray(result) ? result : []);
       } catch (err) {
         console.log(err);
+        setCommentList([]);
       }
     };
     getComments();
