@@ -105,12 +105,12 @@ const ShowPost = ({ post: initialPost }) => {
 
   useEffect(() => {
     if (!initialPost) {
-      const storedPost = JSON.parse(sessionStorage.getItem("post"));
+      const storedPost = JSON.parse(localStorage.getItem("post"));
       if (storedPost && post.length === 0) {
         setPost(storedPost);
       }
     }
-  }, [initialPost]);
+  }, [initialPost, post.length]);
 
   if (!post || post?.length === 0) {
     return (
