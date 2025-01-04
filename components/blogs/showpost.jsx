@@ -230,7 +230,7 @@ const ShowPost = ({ post: initialPost }) => {
                       onClick={handleLikes}
                       className="sm:h-[40px] sm:w-[40px] h-[80px] w-[80px]"
                     />
-                    <p>{likes}</p>
+                    <p className="sm:text-[16px] text-[50px]">{likes}</p>
                   </div>
                 )}
               </div>
