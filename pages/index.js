@@ -21,6 +21,31 @@ export default function Home({ posts }) {
           property="og:image"
           content="https://hxwnfkyekkzeimdyyksm.supabase.co/storage/v1/object/public/images/broblogsimages/blue_lake_5-wallpaper-2048x768.jpg"
         />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content={`${currentUrl}`} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={"Pranshu's Blog"} />
+        <meta
+          name="twitter:description"
+          content={
+            "Hi there, I'm Pranshu, aka Brocode! I'm a 24-year-old Software Engineer with a passion for building web applications."
+          }
+        />
+        <meta
+          name="twitter:image"
+          content={
+            "https://hxwnfkyekkzeimdyyksm.supabase.co/storage/v1/object/public/images/broblogsimages/blue_lake_5-wallpaper-2048x768.jpg"
+          }
+        />
+        <meta name="twitter:site" content={"@brocode08071934"} />
+        <meta name="twitter:creator" content={"@brocode08071934"} />
+
+        <meta name="author" content={"Pranshu Srivastava"} />
+        <meta
+          name="linkedin:author"
+          content={"https://www.linkedin.com/in/pranshu-cse/"}
+        />
       </Head>
       <Navbar />
       <div className="h-[710px] mx-auto w-[700px] sm:w-full sm:max-w-[1500px]">
