@@ -6,7 +6,7 @@ import Footer from "@/components/footer";
 import Head from "next/head";
 import ErrorBoundary from "@/components/error";
 export default function Home({ posts }) {
-  const currentUrl = `${process.env.NEXT_PUBLIC_URL}`;
+  const currentPageUrl = `${process.env.NEXT_PUBLIC_URL}`;
   return (
     <div>
       <Head>
@@ -16,16 +16,17 @@ export default function Home({ posts }) {
           property="og:description"
           content="Hi there, I'm Pranshu, aka Brocode! I'm a 24-year-old Software Engineer with a passion for building web applications."
         />
-        <meta property="og:url" content={`${currentUrl}`} />
+        <meta property="og:url" content={`${currentPageUrl}`} />
         <meta
           property="og:image"
           content="https://hxwnfkyekkzeimdyyksm.supabase.co/storage/v1/object/public/images/broblogsimages/blue_lake_5-wallpaper-2048x768.jpg"
         />
         <meta property="og:type" content="article" />
-        <meta property="og:site_name" content={`${currentUrl}`} />
+        <meta property="og:site_name" content={`${currentPageUrl}`} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={"Pranshu's Blog"} />
+        <meta name="twitter:url" content={currentPageUrl} />
         <meta
           name="twitter:description"
           content={
@@ -45,6 +46,16 @@ export default function Home({ posts }) {
         <meta
           name="linkedin:author"
           content={"https://www.linkedin.com/in/pranshu-cse/"}
+        />
+        <meta property="linkedin:card" content="summary_large_image" />
+        <meta property="linkedin:title" content="Pranshu's Blog" />
+        <meta
+          property="linkedin:description"
+          content="Hi there, I'm Pranshu, aka Brocode! I'm a 24-year-old Software Engineer with a passion for building web applications."
+        />
+        <meta
+          property="linkedin:image"
+          content="https://hxwnfkyekkzeimdyyksm.supabase.co/storage/v1/object/public/images/broblogsimages/blue_lake_5-wallpaper-2048x768.jpg"
         />
       </Head>
       <Navbar />
