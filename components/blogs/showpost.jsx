@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Head from "next/head";
+import toast from "react-hot-toast";
 import { convertDate } from "@/utility/date";
 import { handleGithubLogin } from "@/utility/oauth";
 import { updateLikes } from "@/utility/likes";
@@ -156,6 +157,7 @@ const ShowPost = ({ post: initialPost }) => {
   const copyTextToClipboard = () => {
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(window.location.href);
+      toast.success("Url copied successfully");
     }
   };
   return (
