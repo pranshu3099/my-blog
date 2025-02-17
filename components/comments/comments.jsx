@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "@/context/provider";
 import Image from "next/image";
 import ShowComments from "./showcomments";
+import toast from "react-hot-toast";
 const Comments = ({ url, post, user }) => {
   const [comment, setcomment] = useState("");
   const [commentList, setCommentList] = useState(
@@ -38,7 +39,7 @@ const Comments = ({ url, post, user }) => {
   const handleComment = async (e) => {
     e.preventDefault();
     if (comment === "" || checkForSpaces()) {
-      alert("comment is required");
+      toast.error("comment is required");
     } else {
       let data = {
         user_id: user?.id,
@@ -59,6 +60,7 @@ const Comments = ({ url, post, user }) => {
       const result = await response.json();
       data["name"] = user?.name;
       setCommentList([...commentList, data]);
+      toast.success("commented successfully");
     }
   };
 
