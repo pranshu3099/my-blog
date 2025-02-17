@@ -40,7 +40,13 @@ const Create = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setBearer(localStorage.getItem("Bearer"));
+      let token = localStorage.getItem("Bearer");
+      console.log(token);
+      if (token) {
+        setBearer(token);
+      } else {
+        router.push("/login");
+      }
     }
   }, [router.asPath]);
 
