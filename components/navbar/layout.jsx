@@ -30,11 +30,20 @@ const Navbar = () => {
         <ul className="flex flex-row justify-end gap-5 relative">
           <li className="">
             <Link
-              href="https://x.com/brocode08071934"
+              href="https://x.com/pranshukodes"
               target="_blank"
               className="sm:text-[20px] text-[50px] border-b-4 border-cyan-800 hover:bg-cyan-600 transition duration-300 hover:text-white"
             >
               twitter
+            </Link>
+          </li>
+          <li className="">
+            <Link
+              href="https://www.linkedin.com/in/pranshu-cse/"
+              target="_blank"
+              className="sm:text-[20px] text-[50px] border-b-4 border-cyan-800 hover:bg-cyan-600 transition duration-300 hover:text-white"
+            >
+              linkedin
             </Link>
           </li>
           <li>
