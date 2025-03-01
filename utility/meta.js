@@ -8,7 +8,7 @@ const meta_content = [
       "https://hxwnfkyekkzeimdyyksm.supabase.co/storage/v1/object/public/images/broblogsimages/ijvfue6cl2e33gqzl9a7.webp",
     author: "Pranshu Srivastava",
     imageAlt: "Comparison between Bun and Node.js",
-    twitterHandle: "@brocode08071934",
+    twitterHandle: "@pranshukodes",
   },
 ];
 

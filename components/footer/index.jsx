@@ -17,7 +17,7 @@ const Footer = () => {
             className="sm:h-[40px] sm:w-[40px] h-[80px] w-[80px]"
           />
         </Link>
-        <Link href="https://x.com/brocode08071934" target="_blank">
+        <Link href="https://x.com/pranshukodes" target="_blank">
           <Image
             src="/twitter-svgrepo-com.svg"
             alt="twitter"
