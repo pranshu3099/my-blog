@@ -16,9 +16,9 @@ const meta_content = [
     description:
       "Considering Micro Frontend for your next project? We've got you covered with an extensive Knowledge. Dive into the details and choose the right tool for your needs.",
     image:
-      "https://hxwnfkyekkzeimdyyksm.supabase.co/storage/v1/object/public/images/broblogsimages/microfrontend.png",
+      "https://hxwnfkyekkzeimdyyksm.supabase.co/storage/v1/object/public/images/broblogsimages/0_MyHOXCjtVRGgOpk7.webp",
     author: "Pranshu Srivastava",
-    imageAlt: "Mircofrontend Architecture",
+    imageAlt: "Microfrontend Architecture",
     twitterHandle: "@pranshukodes",
   },
 ];

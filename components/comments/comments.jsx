@@ -66,11 +66,11 @@ const Comments = ({ url, post, user }) => {
 
   return (
     <>
-      <div className="flex flex-col h-auto">
+      <div className="flex flex-col h-auto mt-[35px]">
         <div className="flex items-center h-auto">
-          <h2 className="sm:text-2xl text-[90px] font-bold">Comment</h2>
+          <h2 className="sm:text-4xl text-[90px] font-bold">Comment</h2>
         </div>
-        <div className=" h-auto flex items-center">
+        <div className=" h-auto flex items-cente mt-[35px]">
           <form onSubmit={handleComment}>
             <input
               type="text"
