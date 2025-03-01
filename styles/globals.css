@@ -42,3 +42,8 @@ a {
 li {
   color: var(--paragraph-color);
 }
+
+.list {
+  list-style-type: initial;
+  padding: 25px;
+}
