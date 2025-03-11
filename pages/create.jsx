@@ -13,6 +13,7 @@ import { ThemeContext } from "@/context/provider";
 import EditorComponent from "@/components/editor/Editor";
 import ShowImage from "@/components/create/showimage";
 import axios from "axios";
+import { AuthContext } from "@/context/authprovider";
 const Create = () => {
   const blogReducer = (state, { type, payload }) => {
     switch (type) {
@@ -36,15 +37,12 @@ const Create = () => {
     content: "",
   });
 
-  const [bearer, setBearer] = useState("");
+  const { bearer } = useContext(AuthContext);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       let token = localStorage.getItem("Bearer");
-      console.log(token);
-      if (token) {
-        setBearer(token);
-      } else {
+      if (!token) {
         router.push("/login");
       }
     }
@@ -150,7 +148,6 @@ const Create = () => {
         credentials: "include",
       });
       const result = await response?.json();
-      console.log(result);
       setImageUrl([...imageurl, ...result?.url]);
       setSelectedFile([]);
     } catch (error) {
