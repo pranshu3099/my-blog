@@ -2,16 +2,10 @@ import Navbar from "@/components/navbar/layout";
 import { useContext, useReducer, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ThemeContext } from "@/context/provider";
+import { AuthContext } from "@/context/authprovider";
 const Login = () => {
-  const url = process.env.NEXT_PUBLIC_API_URL;
   const { theme } = useContext(ThemeContext);
-  const router = useRouter();
-  useEffect(() => {
-    const bearer = localStorage.getItem("Bearer");
-    if (bearer?.length) {
-      router.push("/create");
-    }
-  }, []);
+  const { handleLogin } = useContext(AuthContext);
 
   const reducer = (state, action) => {
     switch (action?.type) {
@@ -29,30 +23,12 @@ const Login = () => {
     password: "",
   });
 
-  const handleLogin = async (e) => {
+  const handleAuth = (e) => {
     e.preventDefault();
-    try {
-      const data = state;
-      const response = await fetch(`${url}/login`, {
-        body: JSON.stringify(data),
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-      const result = await response.json();
-      if (response.ok) {
-        localStorage.setItem("Bearer", result?.Authorization);
-        localStorage.setItem("admin_data", JSON.stringify(result?.user));
-        router.push("/create");
-      } else {
-        console.log("Error", result);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    const data = state;
+    handleLogin(data, e);
   };
+
   return (
     <>
       <Navbar />
@@ -60,7 +36,7 @@ const Login = () => {
         <div className="mb-5">
           <h1 className="text-2xl font-bold">Login</h1>
         </div>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleAuth}>
           <div className="flex flex-col items-center gap-12">
             <input
               placeholder="email"
@@ -85,7 +61,7 @@ const Login = () => {
               }}
             />
             <button
-              onClick={handleLogin}
+              onClick={handleAuth}
               type="submit"
               className="text-white w-[200px] hover:bg-blue-800 transition duration-300 bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg px-5 py-2.5 text-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 me-2 mb-2"
             >
