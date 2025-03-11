@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { convertDate } from "@/utility/date";
 import { slugify } from "@/utility/slugify";
 import { extractFirstImageSrc } from "@/utility/getimage";
 import { extractFirstParagraphText } from "@/utility/getimage";
 import Image from "next/image";
 import Link from "next/link";
+import { AuthContext } from "@/context/authprovider";
 const Article = ({ posts }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const { bearer } = useContext(AuthContext);
   useEffect(() => {
     const timer = setTimeout(() => setIsImageLoaded(true), 100);
     return () => clearTimeout(timer);
@@ -33,12 +35,27 @@ const Article = ({ posts }) => {
                 />
               </div>
               <div className=" flex flex-col text-nowrap sm:justify-center h-auto sm:w-[600px]">
-                <Link
-                  href={`posts/${slugify(post?.title)}`}
-                  className="sm:text-[25px] text-[70px] font-bold hover:underline"
-                >
-                  {post?.title}
-                </Link>
+                <div className="flex gap-5">
+                  <Link
+                    href={`posts/${slugify(post?.title)}`}
+                    className="sm:text-[25px] text-[70px] font-bold hover:underline"
+                  >
+                    {post?.title}
+                  </Link>
+                  {bearer && (
+                    <Link
+                      href={`posts/${slugify(post?.title)}`}
+                      className="sm:text-[25px] text-[70px] font-bold hover:underline"
+                    >
+                      <Image
+                        src={"edit-svgrepo-com .svg"}
+                        alt={`Cover image for ${post?.title}`}
+                        width={35}
+                        height={35}
+                      />
+                    </Link>
+                  )}
+                </div>
                 <p className="sm:text-[25px] text-[50px] text-wrap">
                   {extractFirstParagraphText(post?.parsed_content)}
                 </p>
