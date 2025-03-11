@@ -1,22 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "@/context/provider";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
+import { AuthContext } from "@/context/authprovider";
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const [bearer, setBearer] = useState(null);
-  const router = useRouter();
-  useEffect(() => {
-    const bearer = localStorage.getItem("Bearer");
-    setBearer(bearer);
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("Bearer");
-    router.push("/login");
-  };
-
+  const { bearer, handleLogout } = useContext(AuthContext);
+  console.log(bearer);
   return (
     <div className="flex sm:justify-between sm:items-center justify-between p-4 font-extrabold sm:w-full w-[1280px] mb-1 h-auto">
       <div className=" w-1/4 p-2">
