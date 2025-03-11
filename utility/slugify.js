@@ -1,4 +1,4 @@
-const MY_DOB = "2000-07-02";
+const MY_DOB = "1999-07-02";
 export const slugify = (text) => {
   return text
     .toString()
