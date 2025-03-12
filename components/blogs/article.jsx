@@ -42,19 +42,6 @@ const Article = ({ posts }) => {
                   >
                     {post?.title}
                   </Link>
-                  {bearer && (
-                    <Link
-                      href={`posts/${slugify(post?.title)}`}
-                      className="sm:text-[25px] text-[70px] font-bold hover:underline"
-                    >
-                      <Image
-                        src={"edit-svgrepo-com .svg"}
-                        alt={`Cover image for ${post?.title}`}
-                        width={35}
-                        height={35}
-                      />
-                    </Link>
-                  )}
                 </div>
                 <p className="sm:text-[25px] text-[50px] text-wrap">
                   {extractFirstParagraphText(post?.parsed_content)}
