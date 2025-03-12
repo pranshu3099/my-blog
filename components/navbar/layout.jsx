@@ -6,7 +6,6 @@ import { AuthContext } from "@/context/authprovider";
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { bearer, handleLogout } = useContext(AuthContext);
-  console.log(bearer);
   return (
     <div className="flex sm:justify-between sm:items-center justify-between p-4 font-extrabold sm:w-full w-[1280px] mb-1 h-auto">
       <div className=" w-1/4 p-2">
