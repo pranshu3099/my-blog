@@ -14,7 +14,8 @@ import EditorComponent from "@/components/editor/Editor";
 import ShowImage from "@/components/create/showimage";
 import axios from "axios";
 import { AuthContext } from "@/context/authprovider";
-const Create = () => {
+const Create = ({ post }) => {
+  const blogPost = post || null;
   const blogReducer = (state, { type, payload }) => {
     switch (type) {
       case "title":
@@ -33,8 +34,8 @@ const Create = () => {
   const { theme } = useContext(ThemeContext);
   const router = useRouter();
   const [blog, dispatch] = useReducer(blogReducer, {
-    title: "",
-    content: "",
+    title: blogPost?.title || "",
+    content: blogPost?.parsed_content || "",
   });
 
   const { bearer } = useContext(AuthContext);
@@ -155,9 +156,9 @@ const Create = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const CreateBlog = (e) => {
     e.preventDefault();
-    if (blog.title === "" && blog.blogContent === "") {
+    if (blog.title === "" && blog.content === "") {
       alert("please write your blog");
     }
     let randomNum = Math.floor(Math.random() * 9000) + 1000;
@@ -181,6 +182,27 @@ const Create = () => {
       });
   };
 
+  const UpdateBlog = (e) => {
+    e.preventDefault();
+    if (blog.title === "" && blog.content === "") {
+      alert("please write your blog");
+    }
+    let data = {
+      title: blog?.title,
+      content: blog?.content,
+      posts_id: blogPost?.posts_id,
+    };
+    axios
+      .post(`${api_url}/updateposts`, data, { headers })
+      .then((response) => {
+        if (response.status === 200) {
+          router.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <Navbar />
@@ -263,11 +285,11 @@ const Create = () => {
           <EditorComponent blog={blog} dispatch={dispatch} />
           <div>
             <button
-              onClick={handleSubmit}
+              onClick={blogPost ? UpdateBlog : CreateBlog}
               type="button"
               className="text-white w-[200px] hover:bg-blue-800 transition duration-300 bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg px-5 py-2.5 text-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 me-2 mb-2"
             >
-              Create Blog
+              {blogPost ? "Update Blog" : "Create Blog"}
             </button>{" "}
           </div>
         </div>

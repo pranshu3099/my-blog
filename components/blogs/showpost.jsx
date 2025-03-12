@@ -1,6 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
+import Link from "next/link";
 import toast from "react-hot-toast";
 import { convertDate } from "@/utility/date";
 import { handleGithubLogin } from "@/utility/oauth";
@@ -9,6 +11,7 @@ import { getMetaContent } from "@/utility/meta";
 import { generateMetaTags } from "@/utility/get-meta-content";
 import Comments from "../comments/comments";
 import Footer from "../footer";
+import { AuthContext } from "@/context/authprovider";
 const HTMLRenderer = ({ htmlContent }) => {
   return (
     <div
@@ -26,6 +29,8 @@ const ShowPost = ({ post: initialPost }) => {
   const imageRef = useRef(null);
   const url = process.env.NEXT_PUBLIC_API_URL;
   const [currentUrl, setCurrentUrl] = useState("");
+  const { bearer } = useContext(AuthContext);
+  const router = useRouter();
   const PrefixText = `Check out this blog on ${post?.[0]?.title}`;
   const metaContent = useMemo(() => {
     if (!post?.[0]?.title) return [];
@@ -160,6 +165,14 @@ const ShowPost = ({ post: initialPost }) => {
       toast.success("Url copied successfully");
     }
   };
+
+  const handleEditBlog = () => {
+    router.push({
+      pathname: "/edit",
+      query: initialPost?.[0],
+    });
+  };
+
   return (
     <>
       <div>
@@ -184,10 +197,20 @@ const ShowPost = ({ post: initialPost }) => {
               key={index}
               className=" mx-auto w-[1300px] sm:w-[1200px] sm:max-w-[1200px] h-full p-20 flex flex-col gap-3"
             >
-              <div>
+              <div className="flex gap-5 items-center">
                 <h1 className="sm:text-[60px] text-[120px] font-bold h-auto">
                   {postItem?.title}
                 </h1>
+                {bearer && (
+                  <Image
+                    src={"../edit-svgrepo-com .svg"}
+                    alt={`Cover image for ${post?.title}`}
+                    width={35}
+                    height={35}
+                    style={{ cursor: "pointer" }}
+                    onClick={handleEditBlog}
+                  />
+                )}
               </div>
               {!authStatus?.status && (
                 <button

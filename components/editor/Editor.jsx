@@ -9,11 +9,11 @@ const EditorComponent = ({ blog, dispatch }) => {
       <AceEditor
         mode="markdown"
         theme="tomorrow_night"
-        value={blog?.blogContent || ""}
+        value={blog?.content}
         name="markdown-editor"
         editorProps={{ $blockScrolling: true }}
         onChange={(e) => {
-          dispatch({ type: "content", payload: { blogContent: e } });
+          dispatch({ type: "content", payload: { content: e } });
         }}
         width="1800px"
       />
